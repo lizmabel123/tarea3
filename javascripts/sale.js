@@ -99,7 +99,7 @@ function xd(){
   let result=""
   for (let x= 0; x < items.length; x++) { 
   if(items[x].quantity!=0){
-   result += `${items[x].nombre} x${items[x].quantity}
+   result += `${items[x].nombre} x${items[x].quantity} dando un total de ${items[x].price*items[x].quantity} yenes en este producto
 `;
   } 
 }  
@@ -111,6 +111,6 @@ function calcPostageFromPurchase(sum) {
   } else if (sum <= 2000){
    return 500;
   } else {
-    return 250;
+    return 250; 
   }
 }
