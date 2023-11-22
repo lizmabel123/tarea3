@@ -1,6 +1,3 @@
-
-import { subtotal, display, calcPostageFromPurchase} from "./util.js";
-
 const priceElement = document.getElementById("product");
 const numberElement = document.getElementById("number");
 
@@ -27,8 +24,7 @@ const items = [
     quantity:0 
   }
 ]
-
-window.add=()=> {
+function add() {
   const price = parseInt(priceElement.value);
   const number = parseInt(numberElement.value);
   let nameElement, id;
@@ -62,14 +58,31 @@ switch (price) {
   
  purchases.push(purchase);
  items[id].quantity+=number
-  window.alert(`${display(purchases)}
- Subtotal: ${subtotal(purchases)} yenes`);
+  window.alert(`${display()}
+ Subtotal: ${subtotal()} yenes`);
   
 
 }
 
-window.calc= ()=> {
-  const sum = subtotal(purchases);
+function display() {
+  let string = "";
+  for(let i=0; i<purchases.length; i++){
+    string += ` ${purchases[i].price} yenes por ${purchases[i].number} de ${purchases[i].name} 
+`;
+  }
+  return string;
+}
+
+function subtotal() {
+  let sum = 0;
+    for(let i=0; i<purchases.length; i++){
+    sum += purchases[i].price * purchases[i].number;
+  }
+  return sum;
+}
+
+function calc() {
+  const sum = subtotal();
   const postage = calcPostageFromPurchase(sum);
   window.alert(`${xd()}
 Subtotal por productos :${sum}yenes
@@ -91,4 +104,13 @@ function xd(){
   } 
 }  
 return result;
+}
+function calcPostageFromPurchase(sum) {
+  if (sum == 0 || sum >= 3000) {
+    return 0;
+  } else if (sum < 1000){
+   return 500;
+  } else {
+    return 250;
+  }
 }
